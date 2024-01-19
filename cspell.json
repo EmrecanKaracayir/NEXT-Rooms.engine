@@ -3,11 +3,7 @@
   "ignorePaths": [],
   "dictionaryDefinitions": [],
   "dictionaries": [],
-  "words": [
-    "haxball",
-    "kickable",
-    "UEHA"
-  ],
+  "words": ["haxball", "kickable", "UEHA"],
   "ignoreWords": [],
   "import": []
 }
