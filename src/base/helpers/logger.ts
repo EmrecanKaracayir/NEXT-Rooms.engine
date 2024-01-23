@@ -10,13 +10,13 @@ export function LOG(
   if (environment === Environment.PRODUCTION) return;
   switch (level) {
     case LogLevel.INFO:
-      console.info(`[INFO | ${signature}]: `, message);
+      console.info(`[INFO] ${signature}: ${message}`);
       break;
     case LogLevel.WARNING:
-      console.warn(`[WARN | ${signature}]: `, message);
+      console.warn(`[WARN] ${signature}: ${message}`);
       break;
     case LogLevel.ERROR:
-      console.error(`[ERRO | ${signature}]: `, message);
+      console.error(`[ERRO] ${signature}: ${message}`);
       break;
   }
 }

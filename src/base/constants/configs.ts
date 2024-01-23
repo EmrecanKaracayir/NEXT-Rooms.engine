@@ -1,5 +1,7 @@
 import { Environment } from "../enums/environment";
 
+export const BOT_VERSION: string = "v0.0.1";
+
 export const SYSTEM_ENVIRONMENT: Environment = Environment.DEVELOPMENT;
 
 export const ROOM_NAME: string = "🏆 NEXT | Real Soccer | #01 | v8 Auto 🏆";
