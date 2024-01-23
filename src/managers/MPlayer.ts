@@ -3,6 +3,7 @@ import { LogLevel } from "../base/enums/logLevel";
 import { LOG } from "../base/helpers/logger";
 
 export class MPlayer {
+  private static sClassName: string = "MPlayer";
   private static sInstance: MPlayer;
   private static sbDebug: boolean = B_DEFAULT_DEBUG;
 
@@ -17,29 +18,18 @@ export class MPlayer {
   }
 
   private constructor(private m_bDirty: boolean = false) {
-    LOG(
-      MPlayer.sbDebug,
-      LogLevel.INFO,
-      "MPlayer",
-      "constructor",
-      "Initialized.",
-    );
+    const signature: string = `${MPlayer.sClassName}.constructor()`;
+    LOG(MPlayer.sbDebug, LogLevel.INFO, signature, "Initialized.");
   }
 
   public getPlayerModel(player: Player): void {
+    const signature: string = `${MPlayer.sClassName}.getPlayerModel()`;
     LOG(
       MPlayer.sbDebug,
       LogLevel.INFO,
-      "MPlayer",
-      "getPlayerModel",
+      signature,
       `Getting player model for player "${player.name}".`,
     );
-    LOG(
-      MPlayer.sbDebug,
-      LogLevel.WARNING,
-      "MPlayer",
-      "getPlayerModel",
-      `NOT IMPLEMENTED!`,
-    );
+    LOG(MPlayer.sbDebug, LogLevel.WARNING, signature, `NOT IMPLEMENTED!`);
   }
 }

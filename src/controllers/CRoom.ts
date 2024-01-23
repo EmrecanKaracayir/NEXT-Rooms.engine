@@ -6,6 +6,7 @@ import { MCapacity } from "../managers/MCapacity";
 import { MPlayer } from "../managers/MPlayer";
 
 export class CRoom {
+  private static sClassName: string = "CRoom";
   private static sInstance: CRoom;
   private static sbDebug: boolean = B_DEFAULT_DEBUG;
 
@@ -17,32 +18,28 @@ export class CRoom {
   }
 
   private constructor(private readonly m_room: Room) {
-    LOG(CRoom.sbDebug, LogLevel.INFO, "CRoom", "constructor", "Initialized.");
+    const signature: string = `${CRoom.sClassName}.constructor()`;
+    LOG(CRoom.sbDebug, LogLevel.INFO, signature, "Initialized.");
     this.bindEvents();
   }
 
   private bindEvents(): void {
-    LOG(CRoom.sbDebug, LogLevel.INFO, "CRoom", "bindEvents", "Binding events.");
+    const signature: string = `${CRoom.sClassName}.bindEvents()`;
+    LOG(CRoom.sbDebug, LogLevel.INFO, signature, "Binding events.");
     this.m_room.onPlayerJoin = this.onPlayerJoin.bind(this);
   }
 
   private onPlayerJoin(player: Player): void {
+    const signature: string = `${CRoom.sClassName}.onPlayerJoin()`;
     LOG(
       CRoom.sbDebug,
       LogLevel.INFO,
-      "CRoom",
-      "onPlayerJoin",
+      signature,
       `Player "${player.name}" joined the room.`,
     );
-    LOG(
-      CRoom.sbDebug,
-      LogLevel.WARNING,
-      "CRoom",
-      "onPlayerJoin",
-      `NOT IMPLEMENTED!`,
-    );
+    LOG(CRoom.sbDebug, LogLevel.WARNING, signature, `NOT IMPLEMENTED!`);
     MPlayer.get().getPlayerModel(player);
-    const bCapacity: boolean = MCapacity.get().canJoinRoom(
+    const bCapacity: boolean = MCapacity.get().canJoin(
       this.m_room,
       PlayerType.STANDARD,
     );

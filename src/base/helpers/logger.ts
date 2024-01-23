@@ -3,8 +3,7 @@ import { LogLevel } from "../enums/logLevel";
 export function LOG(
   bDebug: boolean,
   level: LogLevel,
-  className: string,
-  methodName: string,
+  signature: string,
   message: string,
 ): void {
   if (!bDebug) {
@@ -12,13 +11,13 @@ export function LOG(
   }
   switch (level) {
     case LogLevel.INFO:
-      console.info(`[INFO | ${className}.${methodName}]: `, message);
+      console.info(`[INFO | ${signature}]: `, message);
       break;
     case LogLevel.WARNING:
-      console.warn(`[WARN | ${className}.${methodName}]: `, message);
+      console.warn(`[WARN | ${signature}]: `, message);
       break;
     case LogLevel.ERROR:
-      console.error(`[ERRO | ${className}.${methodName}]: `, message);
+      console.error(`[ERRO | ${signature}]: `, message);
       break;
   }
 }

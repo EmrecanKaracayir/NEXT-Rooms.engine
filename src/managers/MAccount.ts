@@ -3,6 +3,7 @@ import { LogLevel } from "../base/enums/logLevel";
 import { LOG } from "../base/helpers/logger";
 
 export class MAccount {
+  private static sClassName: string = "MAccount";
   private static sInstance: MAccount;
   private static sbDebug: boolean = B_DEFAULT_DEBUG;
 
@@ -17,12 +18,7 @@ export class MAccount {
   }
 
   private constructor(private m_bDirty: boolean = false) {
-    LOG(
-      MAccount.sbDebug,
-      LogLevel.INFO,
-      "MAccount",
-      "constructor",
-      "Initialized.",
-    );
+    const signature: string = `${MAccount.sClassName}.constructor()`;
+    LOG(MAccount.sbDebug, LogLevel.INFO, signature, "Initialized.");
   }
 }

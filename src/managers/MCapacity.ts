@@ -5,6 +5,7 @@ import { LOG } from "../base/helpers/logger";
 import { capacityRules } from "../base/rules/joinRules";
 
 export class MCapacity {
+  private static sClassName: string = "MCapacity";
   private static sInstance: MCapacity;
   private static sbDebug: boolean = B_DEFAULT_DEBUG;
 
@@ -19,31 +20,25 @@ export class MCapacity {
   }
 
   private constructor(private m_bDirty: boolean = false) {
-    LOG(
-      MCapacity.sbDebug,
-      LogLevel.INFO,
-      "MCapacity",
-      "constructor",
-      "Initialized.",
-    );
+    const signature: string = `${MCapacity.sClassName}.constructor()`;
+    LOG(MCapacity.sbDebug, LogLevel.INFO, signature, "Initialized.");
   }
 
-  public canJoinRoom(room: Room, playerType: PlayerType): boolean {
+  public canJoin(room: Room, playerType: PlayerType): boolean {
+    const signature: string = `${MCapacity.sClassName}.canJoin()`;
     LOG(
       MCapacity.sbDebug,
       LogLevel.INFO,
-      "MCapacity",
-      "canJoinRoom",
-      `Checking if player type "${playerType}" can join room.`,
+      signature,
+      `Checking if player type "${playerType}" can join thee room.`,
     );
     const bJoin: boolean =
       room.getPlayerList().length < capacityRules[playerType];
     LOG(
       MCapacity.sbDebug,
       LogLevel.INFO,
-      "MCapacity",
-      "canJoinRoom",
-      `Currently ${room.getPlayerList().length} players in room. Player ${bJoin ? "can" : "cannot"} join room.`,
+      signature,
+      `Currently ${room.getPlayerList().length} players in room. Player ${bJoin ? "can" : "cannot"} join the room.`,
     );
     return bJoin;
   }
