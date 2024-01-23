@@ -1,26 +1,27 @@
-import { B_DEFAULT_DEBUG } from "../base/constants/configs";
+import { SYSTEM_ENVIRONMENT } from "../base/constants/configs";
+import { Environment } from "../base/enums/environment";
 import { LogLevel } from "../base/enums/logLevel";
 import { LOG } from "../base/helpers/logger";
 
 export class MPlayer {
-  private static sClassName: string = "MPlayer";
+  private static readonly sClassName: string = "MPlayer";
+  private static readonly sEnvironment: Environment = SYSTEM_ENVIRONMENT;
   private static sInstance: MPlayer;
-  private static sbDebug: boolean = B_DEFAULT_DEBUG;
 
-  public static get(bClean: boolean = false): MPlayer {
+  public static get(requireClean: boolean = false): MPlayer {
     if (!MPlayer.sInstance) {
       MPlayer.sInstance = new MPlayer();
     }
-    if (bClean && MPlayer.sInstance.m_bDirty) {
+    if (requireClean && MPlayer.sInstance.mIsDirty) {
       MPlayer.sInstance = new MPlayer();
     }
     return MPlayer.sInstance;
   }
 
-  private constructor(private m_bDirty: boolean = false) {
+  private constructor(private mIsDirty: boolean = false) {
     const signature: string = `${MPlayer.sClassName}.constructor()`;
     // #region LOG
-    LOG(MPlayer.sbDebug, LogLevel.INFO, signature, "Initialized.");
+    LOG(MPlayer.sEnvironment, LogLevel.INFO, signature, "Initialized.");
     // #endregion
   }
 
@@ -28,12 +29,12 @@ export class MPlayer {
     const signature: string = `${MPlayer.sClassName}.getPlayerModel()`;
     // #region LOG
     LOG(
-      MPlayer.sbDebug,
+      MPlayer.sEnvironment,
       LogLevel.INFO,
       signature,
       `Getting player model for player "${player.name}".`,
     );
-    LOG(MPlayer.sbDebug, LogLevel.WARNING, signature, `NOT IMPLEMENTED!`);
+    LOG(MPlayer.sEnvironment, LogLevel.WARNING, signature, `NOT IMPLEMENTED!`);
     // #endregion
   }
 }

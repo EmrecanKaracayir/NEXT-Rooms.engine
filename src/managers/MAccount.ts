@@ -1,26 +1,27 @@
-import { B_DEFAULT_DEBUG } from "../base/constants/configs";
+import { SYSTEM_ENVIRONMENT } from "../base/constants/configs";
+import { Environment } from "../base/enums/environment";
 import { LogLevel } from "../base/enums/logLevel";
 import { LOG } from "../base/helpers/logger";
 
 export class MAccount {
-  private static sClassName: string = "MAccount";
+  private static readonly sClassName: string = "MAccount";
+  private static readonly sEnvironment: Environment = SYSTEM_ENVIRONMENT;
   private static sInstance: MAccount;
-  private static sbDebug: boolean = B_DEFAULT_DEBUG;
 
-  public static get(bClean: boolean = false): MAccount {
+  public static get(requireClean: boolean = false): MAccount {
     if (!MAccount.sInstance) {
       MAccount.sInstance = new MAccount();
     }
-    if (bClean && MAccount.sInstance.m_bDirty) {
+    if (requireClean && MAccount.sInstance.mIsDirty) {
       MAccount.sInstance = new MAccount();
     }
     return MAccount.sInstance;
   }
 
-  private constructor(private m_bDirty: boolean = false) {
+  private constructor(private mIsDirty: boolean = false) {
     const signature: string = `${MAccount.sClassName}.constructor()`;
     // #region LOG
-    LOG(MAccount.sbDebug, LogLevel.INFO, signature, "Initialized.");
+    LOG(MAccount.sEnvironment, LogLevel.INFO, signature, "Initialized.");
     // #endregion
   }
 }

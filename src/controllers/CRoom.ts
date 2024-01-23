@@ -1,4 +1,5 @@
-import { B_DEFAULT_DEBUG } from "../base/constants/configs";
+import { SYSTEM_ENVIRONMENT } from "../base/constants/configs";
+import { Environment } from "../base/enums/environment";
 import { LogLevel } from "../base/enums/logLevel";
 import { PlayerType } from "../base/enums/playerType";
 import { LOG } from "../base/helpers/logger";
@@ -6,9 +7,9 @@ import { MCapacity } from "../managers/MCapacity";
 import { MPlayer } from "../managers/MPlayer";
 
 export class CRoom {
-  private static sClassName: string = "CRoom";
+  private static readonly sClassName: string = "CRoom";
+  private static readonly sEnvironment: Environment = SYSTEM_ENVIRONMENT;
   private static sInstance: CRoom;
-  private static sbDebug: boolean = B_DEFAULT_DEBUG;
 
   public static initialize(roomConfig: RoomConfig): CRoom {
     if (!CRoom.sInstance) {
@@ -17,10 +18,10 @@ export class CRoom {
     return CRoom.sInstance;
   }
 
-  private constructor(private readonly m_room: Room) {
+  private constructor(private readonly mRoom: Room) {
     const signature: string = `${CRoom.sClassName}.constructor()`;
     // #region LOG
-    LOG(CRoom.sbDebug, LogLevel.INFO, signature, "Initialized.");
+    LOG(CRoom.sEnvironment, LogLevel.INFO, signature, "Initialized.");
     // #endregion
     this.bindEvents();
   }
@@ -28,24 +29,24 @@ export class CRoom {
   private bindEvents(): void {
     const signature: string = `${CRoom.sClassName}.bindEvents()`;
     // #region LOG
-    LOG(CRoom.sbDebug, LogLevel.INFO, signature, "Binding events.");
+    LOG(CRoom.sEnvironment, LogLevel.INFO, signature, "Binding events.");
     // #endregion
-    this.m_room.onPlayerJoin = this.onPlayerJoin.bind(this);
+    this.mRoom.onPlayerJoin = this.onPlayerJoin.bind(this);
     // #region LOG
-    LOG(CRoom.sbDebug, LogLevel.INFO, signature, "Binding complete.");
+    LOG(CRoom.sEnvironment, LogLevel.INFO, signature, "Binding complete.");
     // #endregion
   }
 
   private onPlayerJoin(player: Player): void {
     const signature: string = `${CRoom.sClassName}.onPlayerJoin()`;
     // #region LOG
-    LOG(CRoom.sbDebug, LogLevel.INFO, signature, `Player "${player.name}" joined the room.`);
-    LOG(CRoom.sbDebug, LogLevel.WARNING, signature, `NOT IMPLEMENTED!`);
+    LOG(CRoom.sEnvironment, LogLevel.INFO, signature, `Player "${player.name}" joined the room.`);
+    LOG(CRoom.sEnvironment, LogLevel.WARNING, signature, `NOT IMPLEMENTED!`);
     // #endregion
     MPlayer.get().getPlayerModel(player);
-    const bCapacity: boolean = MCapacity.get().canJoin(this.m_room, PlayerType.STANDARD);
+    const bCapacity: boolean = MCapacity.get().canJoin(this.mRoom, PlayerType.STANDARD);
     if (!bCapacity) {
-      this.m_room.kickPlayer(player.id, "Room is full.", false);
+      this.mRoom.kickPlayer(player.id, "Room is full.", false);
     }
   }
 }
