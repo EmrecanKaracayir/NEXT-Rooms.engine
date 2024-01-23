@@ -1,4 +1,4 @@
-import { SYSTEM_ENVIRONMENT } from "../base/constants/configs";
+import { ROOM_CAPACITY, SYSTEM_ENVIRONMENT } from "../base/constants/configs";
 import { Environment } from "../base/enums/environment";
 import { LogLevel } from "../base/enums/logLevel";
 import { PlayerType } from "../base/enums/playerType";
@@ -34,18 +34,19 @@ export class MCapacity {
       MCapacity.sEnvironment,
       LogLevel.INFO,
       signature,
-      `Checking if player type "${playerType}" can join thee room.`,
+      `Checking if player with the "${PlayerType[playerType]}" role can join the room.`,
     );
     // #endregion
-    const bJoin: boolean = room.getPlayerList().length < capacityRules[playerType];
+    const playerCount: number = room.getPlayerList().length - 1; // -1 because the player is already in the room.
+    const canJoin: boolean = playerCount < capacityRules[playerType];
     // #region LOG
     LOG(
       MCapacity.sEnvironment,
       LogLevel.INFO,
       signature,
-      `Currently ${room.getPlayerList().length} players in room. Player ${bJoin ? "can" : "cannot"} join the room.`,
+      `Room has ${playerCount}/${ROOM_CAPACITY} player(s) in room. Player ${canJoin ? "can" : "cannot"} join.`,
     );
     // #endregion
-    return bJoin;
+    return canJoin;
   }
 }
