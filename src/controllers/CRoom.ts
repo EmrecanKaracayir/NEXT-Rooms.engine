@@ -31,18 +31,10 @@ export class CRoom {
 
   private onPlayerJoin(player: Player): void {
     const signature: string = `${CRoom.sClassName}.onPlayerJoin()`;
-    LOG(
-      CRoom.sbDebug,
-      LogLevel.INFO,
-      signature,
-      `Player "${player.name}" joined the room.`,
-    );
+    LOG(CRoom.sbDebug, LogLevel.INFO, signature, `Player "${player.name}" joined the room.`);
     LOG(CRoom.sbDebug, LogLevel.WARNING, signature, `NOT IMPLEMENTED!`);
     MPlayer.get().getPlayerModel(player);
-    const bCapacity: boolean = MCapacity.get().canJoin(
-      this.m_room,
-      PlayerType.STANDARD,
-    );
+    const bCapacity: boolean = MCapacity.get().canJoin(this.m_room, PlayerType.STANDARD);
     if (!bCapacity) {
       this.m_room.kickPlayer(player.id, "Room is full.", false);
     }

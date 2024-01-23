@@ -32,8 +32,7 @@ export class MCapacity {
       signature,
       `Checking if player type "${playerType}" can join thee room.`,
     );
-    const bJoin: boolean =
-      room.getPlayerList().length < capacityRules[playerType];
+    const bJoin: boolean = room.getPlayerList().length < capacityRules[playerType];
     LOG(
       MCapacity.sbDebug,
       LogLevel.INFO,

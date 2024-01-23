@@ -3,16 +3,7 @@
   "ignorePaths": [],
   "dictionaryDefinitions": [],
   "dictionaries": [],
-  "words": [
-    "Coeff",
-    "haxball",
-    "kickable",
-    "UEHA",
-    "xgravity",
-    "xspeed",
-    "ygravity",
-    "yspeed"
-  ],
+  "words": ["Coeff", "haxball", "kickable", "UEHA", "xgravity", "xspeed", "ygravity", "yspeed"],
   "ignoreWords": [],
   "import": []
 }
