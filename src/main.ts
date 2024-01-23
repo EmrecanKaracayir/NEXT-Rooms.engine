@@ -1,8 +1,14 @@
-import { RoomController } from "./controllers/RoomController";
+import {
+  MAX_PLAYERS,
+  NO_PLAYER,
+  PUBLIC,
+  ROOM_NAME,
+} from "./base/constants/configs";
+import { CRoom } from "./controllers/CRoom";
 
-RoomController.withRoomConfig({
-  roomName: "🏆 NEXT | Real Soccer | #01 | v8 Auto 🏆",
-  maxPlayers: 24,
-  public: false,
-  noPlayer: true,
+CRoom.initialize({
+  roomName: ROOM_NAME,
+  maxPlayers: MAX_PLAYERS,
+  public: PUBLIC,
+  noPlayer: NO_PLAYER,
 });
