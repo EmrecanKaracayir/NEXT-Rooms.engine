@@ -1,5 +1,5 @@
 export enum PlayerType {
-  BASIC = 0,
-  VIP = 1,
-  ADMIN = 2,
+  BASIC,
+  VIP,
+  ADMIN,
 }

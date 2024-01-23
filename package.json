@@ -9,7 +9,8 @@
     "format": "prettier --write .",
     "clean": "rm -rf ./dist",
     "prebuild": "npm run clean && npm run format && npm run lint",
-    "build": "webpack"
+    "build": "webpack",
+    "watch": "webpack --watch"
   },
   "author": "EmrecanKaracayir",
   "license": "ISC",
