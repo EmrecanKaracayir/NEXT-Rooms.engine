@@ -1,8 +1,8 @@
 {
-  "name": "ueha-rooms",
-  "version": "1.0.0",
-  "description": "Haxball's best real football rooms UEHA source code.",
-  "main": "dist/ueha.js",
+  "name": "next-rooms",
+  "version": "0.0.1",
+  "description": "Haxball's best real football rooms, NEXT-ROOMS.",
+  "main": "dist/bundle.js",
   "type": "module",
   "scripts": {
     "lint": "eslint src --ext ts && tsc --noEmit",
@@ -13,7 +13,7 @@
     "watch": "webpack --watch"
   },
   "author": "EmrecanKaracayir",
-  "license": "ISC",
+  "license": "PROPRIETARY",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.19.0",
     "@typescript-eslint/parser": "^6.19.0",
