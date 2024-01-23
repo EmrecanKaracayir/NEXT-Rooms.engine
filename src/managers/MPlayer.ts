@@ -19,11 +19,14 @@ export class MPlayer {
 
   private constructor(private m_bDirty: boolean = false) {
     const signature: string = `${MPlayer.sClassName}.constructor()`;
+    // #region LOG
     LOG(MPlayer.sbDebug, LogLevel.INFO, signature, "Initialized.");
+    // #endregion
   }
 
   public getPlayerModel(player: Player): void {
     const signature: string = `${MPlayer.sClassName}.getPlayerModel()`;
+    // #region LOG
     LOG(
       MPlayer.sbDebug,
       LogLevel.INFO,
@@ -31,5 +34,6 @@ export class MPlayer {
       `Getting player model for player "${player.name}".`,
     );
     LOG(MPlayer.sbDebug, LogLevel.WARNING, signature, `NOT IMPLEMENTED!`);
+    // #endregion
   }
 }

@@ -19,20 +19,29 @@ export class CRoom {
 
   private constructor(private readonly m_room: Room) {
     const signature: string = `${CRoom.sClassName}.constructor()`;
+    // #region LOG
     LOG(CRoom.sbDebug, LogLevel.INFO, signature, "Initialized.");
+    // #endregion
     this.bindEvents();
   }
 
   private bindEvents(): void {
     const signature: string = `${CRoom.sClassName}.bindEvents()`;
+    // #region LOG
     LOG(CRoom.sbDebug, LogLevel.INFO, signature, "Binding events.");
+    // #endregion
     this.m_room.onPlayerJoin = this.onPlayerJoin.bind(this);
+    // #region LOG
+    LOG(CRoom.sbDebug, LogLevel.INFO, signature, "Binding complete.");
+    // #endregion
   }
 
   private onPlayerJoin(player: Player): void {
     const signature: string = `${CRoom.sClassName}.onPlayerJoin()`;
+    // #region LOG
     LOG(CRoom.sbDebug, LogLevel.INFO, signature, `Player "${player.name}" joined the room.`);
     LOG(CRoom.sbDebug, LogLevel.WARNING, signature, `NOT IMPLEMENTED!`);
+    // #endregion
     MPlayer.get().getPlayerModel(player);
     const bCapacity: boolean = MCapacity.get().canJoin(this.m_room, PlayerType.STANDARD);
     if (!bCapacity) {

@@ -19,6 +19,8 @@ export class MAccount {
 
   private constructor(private m_bDirty: boolean = false) {
     const signature: string = `${MAccount.sClassName}.constructor()`;
+    // #region LOG
     LOG(MAccount.sbDebug, LogLevel.INFO, signature, "Initialized.");
+    // #endregion
   }
 }

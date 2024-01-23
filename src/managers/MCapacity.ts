@@ -21,24 +21,30 @@ export class MCapacity {
 
   private constructor(private m_bDirty: boolean = false) {
     const signature: string = `${MCapacity.sClassName}.constructor()`;
+    // #region LOG
     LOG(MCapacity.sbDebug, LogLevel.INFO, signature, "Initialized.");
+    // #endregion
   }
 
   public canJoin(room: Room, playerType: PlayerType): boolean {
     const signature: string = `${MCapacity.sClassName}.canJoin()`;
+    // #region LOG
     LOG(
       MCapacity.sbDebug,
       LogLevel.INFO,
       signature,
       `Checking if player type "${playerType}" can join thee room.`,
     );
+    // #endregion
     const bJoin: boolean = room.getPlayerList().length < capacityRules[playerType];
+    // #region LOG
     LOG(
       MCapacity.sbDebug,
       LogLevel.INFO,
       signature,
       `Currently ${room.getPlayerList().length} players in room. Player ${bJoin ? "can" : "cannot"} join the room.`,
     );
+    // #endregion
     return bJoin;
   }
 }
