@@ -1,9 +1,12 @@
 import { ROOM_CAPACITY, SYSTEM_ENVIRONMENT } from "../base/constants/configs";
+import { RESPONSE_OK } from "../base/constants/others";
+import { AppString } from "../base/enums/appString";
 import { Environment } from "../base/enums/environment";
 import { LogLevel } from "../base/enums/logLevel";
 import { PlayerType } from "../base/enums/playerType";
 import { LOG } from "../base/helpers/logger";
 import { capacityRules } from "../base/rules/joinRules";
+import { HLocalization } from "../helpers/HLocalization";
 
 export class MCapacity {
   private static readonly sClassName: string = "MCapacity";
@@ -27,8 +30,8 @@ export class MCapacity {
     // #endregion
   }
 
-  public canJoin(room: Room, playerType: PlayerType): boolean {
-    const signature: string = `${MCapacity.sClassName}.canJoin()`;
+  public canPlayerJoin(room: Room, playerType: PlayerType): AppResponse<string> {
+    const signature: string = `${MCapacity.sClassName}.canPlayerJoin()`;
     // #region LOG
     LOG(
       MCapacity.sEnvironment,
@@ -44,9 +47,28 @@ export class MCapacity {
       MCapacity.sEnvironment,
       LogLevel.INFO,
       signature,
-      `Room has ${playerCount}/${ROOM_CAPACITY} player(s) in room. Player ${canJoin ? "can" : "cannot"} join.`,
+      `Room has ${playerCount}/${ROOM_CAPACITY} player(s) in room. The player ${canJoin ? "can" : "cannot"} join.`,
     );
     // #endregion
-    return canJoin;
+    if (!canJoin) {
+      switch (playerType) {
+        case PlayerType.BASIC:
+          return {
+            success: false,
+            data: HLocalization.get().localize(AppString.MCapacity_canPlayerJoin_basicRejection),
+          };
+        case PlayerType.PREMIUM:
+          return {
+            success: false,
+            data: HLocalization.get().localize(AppString.MCapacity_canPlayerJoin_premiumRejection),
+          };
+        case PlayerType.ADMIN:
+          return {
+            success: false,
+            data: HLocalization.get().localize(AppString.MCapacity_canPlayerJoin_adminRejection),
+          };
+      }
+    }
+    return { success: true, data: RESPONSE_OK };
   }
 }

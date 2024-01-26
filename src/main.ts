@@ -1,9 +1,9 @@
 import {
-  BOT_VERSION as ROOM_VERSION,
   ROOM_CAPACITY,
   ROOM_NAME,
   ROOM_NO_HOST,
   ROOM_PUBLIC,
+  ROOM_VERSION,
   SYSTEM_ENVIRONMENT,
 } from "./base/constants/configs";
 import { LogLevel } from "./base/enums/logLevel";

@@ -44,9 +44,12 @@ export class CRoom {
     LOG(CRoom.sEnvironment, LogLevel.WARNING, signature, `NOT IMPLEMENTED!`);
     // #endregion
     MPlayer.get().getPlayerModel(player);
-    const bCapacity: boolean = MCapacity.get().canJoin(this.mRoom, PlayerType.BASIC);
-    if (!bCapacity) {
-      this.mRoom.kickPlayer(player.id, "Room is full", false);
+    const capacityRes: AppResponse<string> = MCapacity.get().canPlayerJoin(
+      this.mRoom,
+      PlayerType.BASIC,
+    );
+    if (!capacityRes.success) {
+      this.mRoom.kickPlayer(player.id, capacityRes.data, false);
     }
   }
 }
