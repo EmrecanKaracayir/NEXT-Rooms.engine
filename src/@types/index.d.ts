@@ -1,4 +1,5 @@
-import { PlayerType } from "../base/enums/playerType";
+import { Membership } from "../base/enums/Membership";
+import { AppString } from "../base/l10n/AppString";
 
 export {};
 
@@ -9,10 +10,10 @@ declare global {
   };
 
   type AppStringMap = {
-    [K in PlayerType]: string;
+    [K in AppString]: string;
   };
 
-  type PlayerTypeMap<T> = {
-    [K in PlayerType]: T;
+  type MembershipMap<T> = {
+    [K in Membership]: T;
   };
 }

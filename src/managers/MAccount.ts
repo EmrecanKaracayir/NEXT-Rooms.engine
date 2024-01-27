@@ -1,7 +1,6 @@
-import { SYSTEM_ENVIRONMENT } from "../base/constants/configs";
-import { Environment } from "../base/enums/environment";
-import { LogLevel } from "../base/enums/logLevel";
-import { LOG } from "../base/helpers/logger";
+import { SYSTEM_ENVIRONMENT } from "../base/constants/config";
+import { Environment } from "../base/enums/Environment";
+import { LogLevel, ULogger } from "../utils/ULogger";
 
 export class MAccount {
   private static readonly sClassName: string = "MAccount";
@@ -21,7 +20,7 @@ export class MAccount {
   private constructor(private mIsDirty: boolean = false) {
     const signature: string = `${MAccount.sClassName}.constructor()`;
     // #region LOG
-    LOG(MAccount.sEnvironment, LogLevel.INFO, signature, "Initialized.");
+    ULogger.get().log(MAccount.sEnvironment, LogLevel.INFO, signature, "Initialized.");
     // #endregion
   }
 }

@@ -1,9 +1,11 @@
 {
-  "name": "next-rooms",
+  "name": "next-rooms.engine",
   "version": "0.0.1",
-  "description": "Haxball's best real football rooms, NEXT-ROOMS.",
+  "description": "NEXT-Rooms.engine",
   "main": "dist/bundle.js",
   "type": "module",
+  "author": "EmrecanKaracayir",
+  "license": "PROPRIETARY",
   "scripts": {
     "lint": "eslint src --ext ts && tsc --noEmit",
     "format": "prettier --write .",
@@ -12,8 +14,6 @@
     "build": "webpack",
     "watch": "webpack --watch"
   },
-  "author": "EmrecanKaracayir",
-  "license": "PROPRIETARY",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.19.0",
     "@typescript-eslint/parser": "^6.19.0",

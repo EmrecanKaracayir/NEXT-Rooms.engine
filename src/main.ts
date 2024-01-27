@@ -5,13 +5,12 @@ import {
   ROOM_PUBLIC,
   ROOM_VERSION,
   SYSTEM_ENVIRONMENT,
-} from "./base/constants/configs";
-import { LogLevel } from "./base/enums/logLevel";
-import { LOG } from "./base/helpers/logger";
+} from "./base/constants/config";
 import { CRoom } from "./controllers/CRoom";
+import { LogLevel, ULogger } from "./utils/ULogger";
 
 // #region LOG
-LOG(SYSTEM_ENVIRONMENT, LogLevel.INFO, "main", `NEXT-ROOMS ${ROOM_VERSION} started!`);
+ULogger.get().log(SYSTEM_ENVIRONMENT, LogLevel.INFO, "main", `NEXT-ROOMS ${ROOM_VERSION} started!`);
 // #endregion
 
 CRoom.initialize({

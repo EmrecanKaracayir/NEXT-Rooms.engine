@@ -1,12 +1,11 @@
-import { ROOM_CAPACITY, SYSTEM_ENVIRONMENT } from "../base/constants/configs";
+import { ROOM_CAPACITY, SYSTEM_ENVIRONMENT } from "../base/constants/config";
 import { RESPONSE_OK } from "../base/constants/others";
-import { AppString } from "../base/enums/appString";
-import { Environment } from "../base/enums/environment";
-import { LogLevel } from "../base/enums/logLevel";
-import { PlayerType } from "../base/enums/playerType";
-import { LOG } from "../base/helpers/logger";
-import { capacityRules } from "../base/rules/joinRules";
+import { Environment } from "../base/enums/Environment";
+import { Membership } from "../base/enums/Membership";
+import { AppString } from "../base/l10n/AppString";
+import { capacityRules } from "../base/rules/join";
 import { HLocalization } from "../helpers/HLocalization";
+import { LogLevel, ULogger } from "../utils/ULogger";
 
 export class MCapacity {
   private static readonly sClassName: string = "MCapacity";
@@ -26,24 +25,24 @@ export class MCapacity {
   private constructor(private mIsDirty: boolean = false) {
     const signature: string = `${MCapacity.sClassName}.constructor()`;
     // #region LOG
-    LOG(MCapacity.sEnvironment, LogLevel.INFO, signature, "Initialized.");
+    ULogger.get().log(MCapacity.sEnvironment, LogLevel.INFO, signature, "Initialized.");
     // #endregion
   }
 
-  public canPlayerJoin(room: Room, playerType: PlayerType): AppResponse<string> {
+  public canPlayerJoin(room: Room, membership: Membership): AppResponse<string> {
     const signature: string = `${MCapacity.sClassName}.canPlayerJoin()`;
     // #region LOG
-    LOG(
+    ULogger.get().log(
       MCapacity.sEnvironment,
       LogLevel.INFO,
       signature,
-      `Checking if player with the "${PlayerType[playerType]}" role can join the room.`,
+      `Checking if player with the "${Membership[membership]}" role can join the room.`,
     );
     // #endregion
     const playerCount: number = room.getPlayerList().length - 1; // -1 because the player is already in the room.
-    const canJoin: boolean = playerCount < capacityRules[playerType];
+    const canJoin: boolean = playerCount < capacityRules[membership];
     // #region LOG
-    LOG(
+    ULogger.get().log(
       MCapacity.sEnvironment,
       LogLevel.INFO,
       signature,
@@ -51,18 +50,18 @@ export class MCapacity {
     );
     // #endregion
     if (!canJoin) {
-      switch (playerType) {
-        case PlayerType.BASIC:
+      switch (membership) {
+        case Membership.FREE:
           return {
             success: false,
             data: HLocalization.get().localize(AppString.MCapacity_canPlayerJoin_basicRejection),
           };
-        case PlayerType.PREMIUM:
+        case Membership.PREMIUM:
           return {
             success: false,
             data: HLocalization.get().localize(AppString.MCapacity_canPlayerJoin_premiumRejection),
           };
-        case PlayerType.ADMIN:
+        case Membership.ADMIN:
           return {
             success: false,
             data: HLocalization.get().localize(AppString.MCapacity_canPlayerJoin_adminRejection),

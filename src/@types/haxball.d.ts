@@ -12,7 +12,7 @@ declare global {
   class Room {
     /**
      * Sends a chat message using the host player.
-     * @details
+     *
      * If targetId is null or undefined the message is sent to all players. If targetId is defined
      * the message is sent only to the player with a matching id.
      * @deprecated Use {@link sendAnnouncement} instead.
@@ -46,21 +46,21 @@ declare global {
 
     /**
      * Sets the score limit of the room.
-     * @details
+     *
      * If a game is in progress this method does nothing.
      */
     setScoreLimit(limit: number): void;
 
     /**
      * Sets the time limit of the room. The limit must be specified in number of minutes.
-     * @details
+     *
      * If a game is in progress this method does nothing.
      */
     setTimeLimit(limitInMinutes: number): void;
 
     /**
      * Parses the stadiumFileContents as a .hbs stadium file and sets it as the selected stadium.
-     * @details
+     *
      * There must not be a game in progress, If a game is in progress this method does nothing. See
      * example [here](https://github.com/haxball/haxball-issues/blob/master/headless/examples/setCustomStadium.js).
      */
@@ -69,7 +69,7 @@ declare global {
     /**
      * Sets the selected stadium to one of the default stadiums. The name must match exactly (case
      * sensitive).
-     * @details
+     *
      * There must not be a game in progress, If a game is in progress this method does nothing.
      */
     setDefaultStadium(stadiumName: string): void;
@@ -82,21 +82,21 @@ declare global {
 
     /**
      * Sets the colors of a team.
-     * @details
+     *
      * Colors are represented as an integer, for example a pure red color is 0xFF0000.
      */
     setTeamColors(team: TeamID, angle: number, textColor: number, colors: readonly number[]): void;
 
     /**
      * Starts the game.
-     * @details
+     *
      * If a game is already in progress this method does nothing.
      */
     startGame(): void;
 
     /**
      * Stops the game.
-     * @details
+     *
      * If there is no game in progress this method does nothing.
      */
     stopGame(): void;
@@ -129,7 +129,7 @@ declare global {
 
     /**
      * Starts recording of a haxball replay.
-     * @details
+     *
      * Don't forget to call {@link stopRecording} or it will cause a memory leak.
      */
     startRecording(): void;
@@ -137,7 +137,7 @@ declare global {
     /**
      * Stops the recording previously started with startRecording and returns the replay file
      * contents as a Uint8Array.
-     * @details
+     *
      * Returns null if recording was not started or had already been stopped.
      */
     stopRecording(): Uint8Array | null;
@@ -155,9 +155,9 @@ declare global {
     /**
      * First all players listed are removed, then they are reinserted in the same order they appear
      * in the playerIdList.
-     * @details
-     * If moveToTop is true players are inserted at the top of the list, otherwise they are inserted
-     * at the bottom of the list.
+     *
+     * If {@link moveToTop} is true players are inserted at the top of the list, otherwise they are
+     * inserted at the bottom of the list.
      */
     reorderPlayers(playerIdList: readonly number[], moveToTop: boolean): void;
 
@@ -194,7 +194,7 @@ declare global {
 
     /**
      * Overrides the avatar of the target player.
-     * @details
+     *
      * If avatar is set to null the override is cleared and the player will be able to use his own
      * avatar again.
      */
@@ -202,7 +202,7 @@ declare global {
 
     /**
      * Sets properties of the target disc.
-     * @details
+     *
      * If settings is set to null the override is cleared and the default stadium settings will be
      * used again. For example `room.setDiscProperties(0, {x: 0, y: 0});` will set the position of
      * disc 0 to <0,0> while leaving any other value intact.
@@ -234,7 +234,7 @@ declare global {
     /**
      * Object filled with the collision flags constants that compose the cMask and cGroup disc
      * properties.
-     * @details
+     *
      * Read more about collision flags [here](https://github.com/haxball/haxball-issues/wiki/Collision-Flags).
      */
     CollisionFlags: CollisionFlags;
@@ -256,7 +256,7 @@ declare global {
 
     /**
      * @event onPlayerChat called when a player sends a chat message.
-     * @details The event function can return `false` in order to filter the chat message. This
+     * The event function can return `false` in order to filter the chat message. This
      * prevents the chat message from reaching other players in the room.
      */
     onPlayerChat(player: Player, msg: string): boolean;
@@ -301,7 +301,7 @@ declare global {
 
     /**
      * @event onPlayerKicked called when a player has been kicked from the room.
-     * @details
+     *
      * This is always called after the onPlayerLeave event. @param byPlayer Is the player which
      * caused the event (can be null if the event wasn't caused by a player).
      */
@@ -315,7 +315,7 @@ declare global {
     /**
      * @event onPlayerActivity called once for every game tick (happens 60 times per second). This
      * is useful if you want to monitor the player and ball positions without missing any ticks.
-     * @details
+     *
      * This event is not called if the game is paused or stopped.
      */
     onGameTick(): void;
@@ -329,7 +329,7 @@ declare global {
 
     /**
      * @event onGameUnpause called when the game is unpaused.
-     * @details
+     *
      * After this event there's a timer before the game is fully unpaused, to detect when the game
      * has really resumed you can listen for the first {@link onGameTick} event after this event is
      * called.
@@ -346,7 +346,7 @@ declare global {
 
     /**
      * @event onPlayerActivity called when a player gives signs of activity, such as pressing a key.
-     * @details
+     *
      * This is useful for detecting inactive players.
      */
     onPlayerActivity(player: Player): void;
@@ -401,7 +401,7 @@ declare global {
     position: Position | null;
     /**
      * The player's public ID. Players can view their own ID's [here](https://www.haxball.com/playerauth).
-     * @details
+     *
      * The public ID is useful to validate that a player is who he claims to be, but can't be used
      * to verify that a player isn't someone else. Which means it's useful for implementing user
      * accounts, but not useful for implementing a banning system.
@@ -411,6 +411,12 @@ declare global {
      * This property is only set in the {@link Room.onPlayerJoin} event.
      */
     auth: string | null;
+    /**
+     * A string that uniquely identifies the player's connection, if two players join using the same
+     * network this string will be equal.
+     *
+     * This property is only set in the RoomObject.onPlayerJoin event.
+     */
     conn: string;
   }
 
@@ -471,7 +477,7 @@ declare global {
     /**
      * Can be used to skip the recaptcha by setting it to a token that can be obtained
      * [here](https://www.haxball.com/headlesstoken).
-     * @details
+     *
      * These tokens will expire after a few minutes.
      */
     token?: string;
@@ -544,7 +550,7 @@ declare global {
   /**
    * Collision flags are what haxball's physics uses to determine which objects collide and which
    * objects ignore each other.
-   * @details
+   *
    * Each flag represents a group or category.
    */
   interface CollisionFlags {

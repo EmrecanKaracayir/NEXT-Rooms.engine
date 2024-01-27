@@ -1,7 +1,6 @@
-import { SYSTEM_ENVIRONMENT } from "../base/constants/configs";
-import { Environment } from "../base/enums/environment";
-import { LogLevel } from "../base/enums/logLevel";
-import { LOG } from "../base/helpers/logger";
+import { SYSTEM_ENVIRONMENT } from "../base/constants/config";
+import { Environment } from "../base/enums/Environment";
+import { LogLevel, ULogger } from "../utils/ULogger";
 
 export class MPlayer {
   private static readonly sClassName: string = "MPlayer";
@@ -21,20 +20,20 @@ export class MPlayer {
   private constructor(private mIsDirty: boolean = false) {
     const signature: string = `${MPlayer.sClassName}.constructor()`;
     // #region LOG
-    LOG(MPlayer.sEnvironment, LogLevel.INFO, signature, "Initialized.");
+    ULogger.get().log(MPlayer.sEnvironment, LogLevel.INFO, signature, "Initialized.");
     // #endregion
   }
 
   public getPlayerModel(player: Player): void {
     const signature: string = `${MPlayer.sClassName}.getPlayerModel()`;
     // #region LOG
-    LOG(
+    ULogger.get().log(
       MPlayer.sEnvironment,
       LogLevel.INFO,
       signature,
       `Getting player model for player "${player.name}".`,
     );
-    LOG(MPlayer.sEnvironment, LogLevel.WARNING, signature, `NOT IMPLEMENTED!`);
+    ULogger.get().log(MPlayer.sEnvironment, LogLevel.WARNING, signature, `NOT IMPLEMENTED!`);
     // #endregion
   }
 }

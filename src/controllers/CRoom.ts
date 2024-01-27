@@ -1,10 +1,9 @@
-import { SYSTEM_ENVIRONMENT } from "../base/constants/configs";
-import { Environment } from "../base/enums/environment";
-import { LogLevel } from "../base/enums/logLevel";
-import { PlayerType } from "../base/enums/playerType";
-import { LOG } from "../base/helpers/logger";
+import { SYSTEM_ENVIRONMENT } from "../base/constants/config";
+import { Environment } from "../base/enums/Environment";
+import { Membership } from "../base/enums/Membership";
 import { MCapacity } from "../managers/MCapacity";
 import { MPlayer } from "../managers/MPlayer";
+import { LogLevel, ULogger } from "../utils/ULogger";
 
 export class CRoom {
   private static readonly sClassName: string = "CRoom";
@@ -21,7 +20,7 @@ export class CRoom {
   private constructor(private readonly mRoom: Room) {
     const signature: string = `${CRoom.sClassName}.constructor()`;
     // #region LOG
-    LOG(CRoom.sEnvironment, LogLevel.INFO, signature, "Initialized.");
+    ULogger.get().log(CRoom.sEnvironment, LogLevel.INFO, signature, "Initialized.");
     // #endregion
     this.bindEvents();
   }
@@ -29,24 +28,30 @@ export class CRoom {
   private bindEvents(): void {
     const signature: string = `${CRoom.sClassName}.bindEvents()`;
     // #region LOG
-    LOG(CRoom.sEnvironment, LogLevel.INFO, signature, "Binding events.");
+    ULogger.get().log(CRoom.sEnvironment, LogLevel.INFO, signature, "Binding events.");
     // #endregion
     this.mRoom.onPlayerJoin = this.onPlayerJoin.bind(this);
     // #region LOG
-    LOG(CRoom.sEnvironment, LogLevel.INFO, signature, "Binding complete.");
+    ULogger.get().log(CRoom.sEnvironment, LogLevel.INFO, signature, "Binding complete.");
     // #endregion
   }
 
   private onPlayerJoin(player: Player): void {
     const signature: string = `${CRoom.sClassName}.onPlayerJoin()`;
     // #region LOG
-    LOG(CRoom.sEnvironment, LogLevel.INFO, signature, `Player "${player.name}" joined the room.`);
-    LOG(CRoom.sEnvironment, LogLevel.WARNING, signature, `NOT IMPLEMENTED!`);
+    ULogger.get().log(
+      CRoom.sEnvironment,
+      LogLevel.INFO,
+      signature,
+      `Player "${player.name}" joined the room.`,
+    );
+    ULogger.get().log(CRoom.sEnvironment, LogLevel.WARNING, signature, `NOT IMPLEMENTED!`);
+    ULogger.get().log(CRoom.sEnvironment, LogLevel.INFO, signature, `Player conn: ${player.conn}`);
     // #endregion
     MPlayer.get().getPlayerModel(player);
     const capacityRes: AppResponse<string> = MCapacity.get().canPlayerJoin(
       this.mRoom,
-      PlayerType.BASIC,
+      Membership.FREE,
     );
     if (!capacityRes.success) {
       this.mRoom.kickPlayer(player.id, capacityRes.data, false);
