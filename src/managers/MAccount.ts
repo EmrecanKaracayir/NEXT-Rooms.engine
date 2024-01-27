@@ -1,6 +1,6 @@
-import { SYSTEM_ENVIRONMENT } from "../base/constants/config";
-import { Environment } from "../base/enums/Environment";
-import { LogLevel, ULogger } from "../utils/ULogger";
+import { SYSTEM_ENVIRONMENT } from "../app/constants/config";
+import { Environment } from "../app/enums/Environment";
+import { LogLevel, ULogger } from "../app/utils/ULogger";
 
 export class MAccount {
   private static readonly sClassName: string = "MAccount";

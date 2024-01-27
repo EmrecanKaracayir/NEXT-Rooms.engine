@@ -1,5 +1,5 @@
-import { Membership } from "../base/enums/Membership";
-import { AppString } from "../base/l10n/AppString";
+import { Membership } from "../app/enums/Membership";
+import { AppString } from "../app/l10n/AppString";
 
 export {};
 

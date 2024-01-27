@@ -1,8 +1,8 @@
-import { DEFAULT_LOCALE, SYSTEM_ENVIRONMENT } from "../base/constants/config";
-import { Environment } from "../base/enums/Environment";
-import { AppString } from "../base/l10n/AppString";
-import { EN } from "../base/l10n/locales/en";
-import { TR } from "../base/l10n/locales/tr";
+import { DEFAULT_LOCALE, SYSTEM_ENVIRONMENT } from "../constants/config";
+import { Environment } from "../enums/Environment";
+import { AppString } from "../l10n/AppString";
+import { EN } from "../l10n/locales/en";
+import { TR } from "../l10n/locales/tr";
 import { LogLevel, ULogger } from "../utils/ULogger";
 
 export class HLocalization {

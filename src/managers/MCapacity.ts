@@ -1,11 +1,11 @@
-import { ROOM_CAPACITY, SYSTEM_ENVIRONMENT } from "../base/constants/config";
-import { RESPONSE_OK } from "../base/constants/others";
-import { Environment } from "../base/enums/Environment";
-import { Membership } from "../base/enums/Membership";
-import { AppString } from "../base/l10n/AppString";
-import { capacityRules } from "../base/rules/join";
-import { HLocalization } from "../helpers/HLocalization";
-import { LogLevel, ULogger } from "../utils/ULogger";
+import { ROOM_CAPACITY, SYSTEM_ENVIRONMENT } from "../app/constants/config";
+import { RESPONSE_OK } from "../app/constants/others";
+import { Environment } from "../app/enums/Environment";
+import { Membership } from "../app/enums/Membership";
+import { AppString } from "../app/l10n/AppString";
+import { capacityRules } from "../app/rules/join";
+import { HLocalization } from "../app/helpers/HLocalization";
+import { LogLevel, ULogger } from "../app/utils/ULogger";
 
 export class MCapacity {
   private static readonly sClassName: string = "MCapacity";

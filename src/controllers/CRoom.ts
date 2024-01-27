@@ -1,9 +1,9 @@
-import { SYSTEM_ENVIRONMENT } from "../base/constants/config";
-import { Environment } from "../base/enums/Environment";
-import { Membership } from "../base/enums/Membership";
+import { SYSTEM_ENVIRONMENT } from "../app/constants/config";
+import { Environment } from "../app/enums/Environment";
+import { Membership } from "../app/enums/Membership";
+import { LogLevel, ULogger } from "../app/utils/ULogger";
 import { MCapacity } from "../managers/MCapacity";
 import { MPlayer } from "../managers/MPlayer";
-import { LogLevel, ULogger } from "../utils/ULogger";
 
 export class CRoom {
   private static readonly sClassName: string = "CRoom";

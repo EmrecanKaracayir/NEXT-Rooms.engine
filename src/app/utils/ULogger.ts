@@ -1,4 +1,4 @@
-import { Environment } from "../base/enums/Environment";
+import { Environment } from "../enums/Environment";
 
 export class ULogger {
   private static sInstance: ULogger;

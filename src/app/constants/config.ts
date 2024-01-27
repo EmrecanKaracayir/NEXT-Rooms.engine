@@ -1,5 +1,5 @@
-import { AppLocale } from "../../helpers/HLocalization";
 import { Environment } from "../enums/Environment";
+import { AppLocale } from "../helpers/HLocalization";
 
 export const ROOM_VERSION: string = "v0.0.1";
 
